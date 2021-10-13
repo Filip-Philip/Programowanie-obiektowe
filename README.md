@@ -1,2 +1,2 @@
 # Programowanie-obiektowe
-# Repozytorium na przedmiot Programowanie Obiektowe
+Repozytorium na przedmiot Programowanie Obiektowe
