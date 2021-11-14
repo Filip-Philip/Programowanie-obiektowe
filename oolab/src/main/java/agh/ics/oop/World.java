@@ -4,14 +4,15 @@ import java.util.Arrays;
 
 public class World {
     public static void main(String[] args){
-        Animal animal = new Animal();
-        String[] input = {"f", "backward", "r", "f", "f", "das", "das", "l", "b"};
-        MoveDirection[] directions = OptionsParser.parse(input);
-        System.out.println(Arrays.toString(directions));
-        for (MoveDirection direction : directions){
-            animal.move(direction);
-        }
-        System.out.println(animal.toString());
+//        String[] a = {"f", "b", "r", "l"};
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
+        MapVisualiser mapState = new MapVisualiser(map);
+        StringBuilder mapPic = new StringBuilder(mapState.draw(new Vector2d(0, 0), new Vector2d(10, 5)));
+        System.out.println(mapPic);
     }
     public static Direction[] string_to_enum(String[] strings){
         Direction[] new_directions = new Direction[strings.length];

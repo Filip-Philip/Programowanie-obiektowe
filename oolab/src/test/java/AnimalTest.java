@@ -1,6 +1,4 @@
-import agh.ics.oop.Animal;
-import agh.ics.oop.MoveDirection;
-import agh.ics.oop.OptionsParser;
+import agh.ics.oop.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -9,25 +7,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AnimalTest {
     @Test
     void orientationTest() {
-        Animal animal = new Animal();
-        animal.move(MoveDirection.RIGHT);
+        IWorldMap map = new RectangularMap(4,4);
+        Animal animal = new Animal(new Vector2d(2,2), map);
+        animal.move(MoveDirection.RIGHT, map);
         assertEquals(animal.toString(), "(Wschód, (2, 2))");
-        animal.move(MoveDirection.RIGHT);
+        animal.move(MoveDirection.RIGHT, map);
         assertEquals(animal.toString(), "(Południe, (2, 2))");
-        animal.move(MoveDirection.LEFT);
+        animal.move(MoveDirection.LEFT, map);
         assertEquals(animal.toString(), "(Wschód, (2, 2))");
     }
 
     @Test
     void positionTest() {
-        Animal animal = new Animal();
-        animal.move(MoveDirection.FORWARD);
+        IWorldMap map = new RectangularMap(4,4);
+        Animal animal = new Animal(new Vector2d(2,2), map);
+        animal.move(MoveDirection.FORWARD, map);
         assertEquals(animal.toString(), "(Północ, (2, 3))");
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.BACKWARD);
+        animal.move(MoveDirection.LEFT, map);
+        animal.move(MoveDirection.BACKWARD, map);
         assertEquals(animal.toString(), "(Zachód, (3, 3))");
         for (int i = 0; i < 10; i++){
-            animal.move(MoveDirection.FORWARD);
+            animal.move(MoveDirection.FORWARD, map);
         }
         assertEquals(animal.toString(), "(Zachód, (0, 3))");
     }
