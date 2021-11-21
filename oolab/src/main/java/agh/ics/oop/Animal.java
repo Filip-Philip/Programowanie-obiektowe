@@ -11,6 +11,7 @@ public class Animal {
         this.orientation = MapDirection.NORTH;
         this.position = initialPosition;
         this.map = map;
+        map.place(this);
     }
 
     public Vector2d getPosition() {
@@ -49,14 +50,7 @@ public class Animal {
                 case WEST -> new Vector2d(-1, 0);
                 case EAST -> new Vector2d(1, 0);
             };
-//            if(direction.equals(MoveDirection.FORWARD) && position.add(movementVector).precedes(MAP_TOP_RIGHT_CORNER)
-//                && position.add(movementVector).follows(MAP_BOTTOM_LEFT_CORNER)){
-//                position = position.add(movementVector);
-//            }
-//            else if(direction.equals(MoveDirection.BACKWARD) && position.subtract(movementVector).precedes(MAP_TOP_RIGHT_CORNER)
-//                    && position.subtract(movementVector).follows(MAP_BOTTOM_LEFT_CORNER)){
-//                position = position.subtract(movementVector);
-//            }
+
             if (direction.equals(MoveDirection.FORWARD) && map.canMoveTo(position.add(movementVector))) {
                 position = position.add(movementVector);
             } else if (direction.equals(MoveDirection.BACKWARD) && map.canMoveTo(position.subtract(movementVector))) {

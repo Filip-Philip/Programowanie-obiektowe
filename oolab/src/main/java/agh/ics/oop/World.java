@@ -1,20 +1,16 @@
 package agh.ics.oop;
 
-import java.util.Arrays;
-
 public class World {
     public static void main(String[] args){
-//        String[] a = {"f", "b", "r", "l"};
         MoveDirection[] directions = new OptionsParser().parse(args);
-        IWorldMap map = new RectangularMap(10, 5);
+        AbstractWorldMap map = new GrassField(10);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
         IEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
-        MapVisualiser mapState = new MapVisualiser(map);
-        StringBuilder mapPic = new StringBuilder(mapState.draw(new Vector2d(0, 0), new Vector2d(10, 5)));
-        System.out.println(mapPic);
+        System.out.println(map.toString());
     }
-    public static Direction[] string_to_enum(String[] strings){
+
+    public static Direction[] stringToEnum(String[] strings){
         Direction[] new_directions = new Direction[strings.length];
         int i = 0;
         for(String string: strings) {
