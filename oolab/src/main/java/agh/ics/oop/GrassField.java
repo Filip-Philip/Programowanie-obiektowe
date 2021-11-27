@@ -1,11 +1,13 @@
 package agh.ics.oop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class GrassField extends AbstractWorldMap{
     private final int numberOfClumps;
-    private ArrayList<Grass> grassClumps = new ArrayList<>();
+    private Map<Vector2d, Grass> grassHashMap = new HashMap<>();
 
     public GrassField(int numberOfClumps){
         this.numberOfClumps = numberOfClumps;
@@ -16,7 +18,7 @@ public class GrassField extends AbstractWorldMap{
             Vector2d randomPosition =  new Vector2d(random.nextInt(mapTopRightCorner.x),
                     random.nextInt(mapTopRightCorner.y));
             if( !(objectAt(randomPosition) instanceof Grass) ) {
-                grassClumps.add(new Grass(randomPosition));
+                grassHashMap.put(randomPosition, new Grass(randomPosition));
                 i++;
             }
         }
@@ -30,20 +32,12 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public boolean isOccupied(Vector2d position) {
         Boolean isOccupiedParent = super.isOccupied(position);
-        for(Grass grassClump : grassClumps){
-            if(grassClump.getPosition().equals(position)) return true;
-        }
-        return isOccupiedParent;
+        return isOccupiedParent || grassHashMap.containsKey(position);
     }
 
     @Override
     public Object objectAt(Vector2d position) {
-        for(Animal animal : animals){
-            if(animal.getPosition().equals(position)) return animal;
-        }
-        for(Grass grassClump : grassClumps){
-            if(grassClump.getPosition().equals(position)) return grassClump;
-        }
-        return null;
+        if(animalsHashMap.containsKey(position)) return animalsHashMap.get(position);
+        return grassHashMap.get(position);
     }
 }
