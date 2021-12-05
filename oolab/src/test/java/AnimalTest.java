@@ -1,8 +1,7 @@
 import agh.ics.oop.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AnimalTest {
     @Test
@@ -34,10 +33,14 @@ public class AnimalTest {
 
     @Test
     void parserTest() {
-        String[] input = {"b", "forward", "asdas", "l", "right"};
+        String[] input = {"b", "forward", "f", "l", "right"};
         MoveDirection[] parserOutput = OptionsParser.parse(input);
-        MoveDirection[] correctOutput = {MoveDirection.BACKWARD, MoveDirection.FORWARD, MoveDirection.LEFT,
-                                        MoveDirection.RIGHT};
+        MoveDirection[] correctOutput = {MoveDirection.BACKWARD, MoveDirection.FORWARD, MoveDirection.FORWARD,
+                MoveDirection.LEFT, MoveDirection.RIGHT};
         assertArrayEquals(parserOutput, correctOutput);
+        String[] input2 = {"b", "forward", "dasdas", "l", "right"};
+        assertThrows(IllegalArgumentException.class, () -> {
+            OptionsParser.parse(input2);
+        });
     }
 }

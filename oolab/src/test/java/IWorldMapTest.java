@@ -1,7 +1,7 @@
 import agh.ics.oop.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class IWorldMapTest {
@@ -23,6 +23,23 @@ public class IWorldMapTest {
         assertEquals(grassField.canMoveTo(positionTested), false);
         positionTested = new Vector2d(347, 145);
         assertEquals(grassField.canMoveTo(positionTested), true);
+    }
+
+    @Test
+    void placeTest() {
+        IWorldMap recMap = new RectangularMap(4, 4);
+        IWorldMap grassField = new GrassField(4);
+        Vector2d positionTested = new Vector2d(1,1);
+        Animal animalRecMap1 = new Animal(positionTested, recMap);
+        assertEquals(animalRecMap1.getPosition(), positionTested);
+        Animal animalGrassField1 = new Animal(positionTested, grassField);
+        assertEquals(animalGrassField1.getPosition(), positionTested);
+        assertThrows(IllegalArgumentException.class, () -> {
+           Animal animalRecMap2 = new Animal(positionTested, recMap); 
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            Animal animalGrassField2 = new Animal(positionTested, grassField);
+        });
     }
 
     @Test

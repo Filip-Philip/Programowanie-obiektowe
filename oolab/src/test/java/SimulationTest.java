@@ -1,6 +1,5 @@
 import agh.ics.oop.*;
 import org.junit.jupiter.api.Test;
-import agh.ics.oop.IWorldMap;
 import agh.ics.oop.RectangularMap;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -2,11 +2,8 @@ package agh.ics.oop;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 
 public class Animal {
-    public static final Vector2d MAP_TOP_RIGHT_CORNER = new Vector2d(4, 4);
-    public static final Vector2d MAP_BOTTOM_LEFT_CORNER = new Vector2d(0, 0);
     private Vector2d position;
     private MapDirection orientation;
     private IWorldMap map;
